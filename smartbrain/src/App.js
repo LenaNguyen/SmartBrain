@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Clarifai from 'clarifai';
+import FacialRecognition from './components/FacialRecognition/FacialRecognition'
 import Navigation from './components/Navigation/Navigation';
 import Particles from 'react-particles-js';
 import Logo from './components/Logo/Logo';
@@ -31,15 +32,21 @@ constructor(){
   super();
   this.state = {
     input: '',
+    imageUrl:''
   }
 }
 
 onInputChange = (event) => {
-  console.log(event.target.value);
+  this.setState({input: event.target.value});
 }
 
 onButtonSubmit = () => {
-  app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai.com/face-det.jpg").then(
+  this.setState({imageUrl: this.state.input});
+  console.log(this.state.imageUrl);
+  app.models.predict(
+    Clarifai.COLOR_MODEL, 
+    this.state.input)
+    .then(
     function(response) {
       console.log(response);
     },
@@ -56,9 +63,7 @@ onButtonSubmit = () => {
         <Logo/>
         <Rank/>
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
-        {
-          // <FaceRecognition/>
-        }
+        <FacialRecognition imageUrl={this.state.imageUrl}/>
       </div>
     );
   }
