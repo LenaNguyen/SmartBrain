@@ -6,7 +6,7 @@ constructor(){
     this.state = {
         email: '',
         password: '',
-        name: ''
+        name: '',
     }
 }
 
