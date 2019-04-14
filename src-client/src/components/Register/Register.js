@@ -38,7 +38,7 @@ onSubmitRegister = () => {
             this.props.loadUser(user);
             this.props.onRouteChange('home');
         }else{
-            alert('User already exists');
+            alert('Invalid request');
         }
     })
     .catch(err => console.log(err));
