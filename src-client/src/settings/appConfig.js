@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Settings = {
     baseUrl: 'https://obscure-lowlands-16603.herokuapp.com/'
 }
