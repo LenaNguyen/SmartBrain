@@ -40,7 +40,8 @@ onSubmitRegister = () => {
         }else{
             alert('User already exists');
         }
-    });
+    })
+    .catch(err => console.log(err));
 }
     render() {
         return (

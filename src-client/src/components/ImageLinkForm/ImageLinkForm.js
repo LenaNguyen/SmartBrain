@@ -1,7 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css';
 
-const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
+const ImageLinkForm = ({ onInputChange, onSubmitImage }) => {
     return (
         <div>
             <p className='f3'>
@@ -12,7 +12,7 @@ const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
                     <input type='text' className="f4 pa2 w-70 center" onChange={onInputChange}/>
                     <button 
                     className="f4 grow w-30 link ph3 dib white bg-light-blue br2"
-                    onClick={onButtonSubmit}>Detect</button>
+                    onClick={onSubmitImage}>Detect</button>
                 </div>
             </div>
         </div >
