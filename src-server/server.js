@@ -22,9 +22,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    db.select('*')
-    .from('users')
-    .then(users => res.send(users));
+    // db.select('*')
+    // .from('users')
+    // .then(users => res.send(users));
+    res.send('it is working');
 });
 
 app.post('/signin', signIn.handleSignIn(db, bcrypt)); //alternative syntax for functions
