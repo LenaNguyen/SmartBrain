@@ -1,9 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/src-server/node_modules
-/src-client/node_modules
-src-client/.pnp
+/src-server/node_modules/
+/src-client/node_modules/
+/src-client/.pnp
 .pnp.js
 
 # testing
