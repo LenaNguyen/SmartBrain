@@ -1,4 +1,5 @@
 import React from 'react';
+import Settings from '../../settings/appConfig';
 
 class Register extends React.Component {
 constructor(){
@@ -23,7 +24,7 @@ onPasswordChange = (event) => {
 }
 
 onSubmitRegister = () => {
-    fetch('http://localhost:3000/register', {
+    fetch(Settings.baseUrl + 'register', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
