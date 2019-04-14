@@ -11,10 +11,8 @@ const signIn = require('./controllers/signIn');
 const db = knex({
     client: 'pg',
     connection: {
-    host: 'postgresql-trapezoidal-87864',
-    user: 'postgres',
-    password: 'test',
-    database: 'smartbrain'
+    host: process.env.DATABASE_URL,
+    ssl: true
     }
 });
 const app = express();
