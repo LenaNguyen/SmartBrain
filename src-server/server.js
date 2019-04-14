@@ -11,8 +11,8 @@ const signIn = require('./controllers/signIn');
 const db = knex({
     client: 'pg',
     connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
     }
 });
 const app = express();
@@ -20,10 +20,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    // db.select('*')
-    // .from('users')
-    // .then(users => res.send(users));
-    res.send('it is working');
+    db.select('*')
+    .from('users')
+    .then(users => res.send(users));
 });
 
 app.post('/signin', signIn.handleSignIn(db, bcrypt)); //alternative syntax for functions
