@@ -1,3 +1,4 @@
+import Alert from './components/Alert/Alert';
 import React, { Component } from 'react';
 import './App.css';
 import FacialRecognition from './components/FacialRecognition/FacialRecognition'
@@ -31,6 +32,7 @@ const initialState = {
   boxes: [],
   route: 'signin',
   isSignedIn: false,
+  signInFailed: false,
   user: {
     id: '',
     name: '',
@@ -75,6 +77,10 @@ class App extends Component {
 
   displayFaceBox = (boxes) => {
     this.setState({boxes: boxes});
+  }
+
+  displayAlert = (state) => {
+    this.setState({signInFailed: state});
   }
 
   onInputChange = (event) => {
@@ -124,6 +130,9 @@ class App extends Component {
     const {isSignedIn, imageUrl} = this.state;
     return (
       <div className="App">
+      {this.state.signInFailed === true ? 
+        <Alert displayAlert={this.displayAlert}/> : null
+      }
         <Particles className='particles' params={ParticlesOptions} />
         <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
         {this.state.route === 'home'
@@ -135,7 +144,7 @@ class App extends Component {
           </div>
         : (
             this.state.route === 'signin'
-            ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} displayAlert={this.displayAlert} />
             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
           }

@@ -32,10 +32,16 @@ class SignIn extends React.Component {
         .then(user => {
             if(user.id){
                 this.props.loadUser(user);
+                this.props.displayAlert(false);
                 this.props.onRouteChange('home');
             }
+            else{
+                this.props.displayAlert(true);
+            }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            this.props.displayAlert(true);
+        });
     }
     render() {
         const {onRouteChange} = this.props;
