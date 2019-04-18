@@ -112,11 +112,16 @@ class App extends Component {
           .then(count => {
             this.setState(Object.assign(this.state.user, {entries: count}))
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err); 
+            this.displayAlert(true, "Unable to update entry count.");
+          });
+        } else {
+          this.displayAlert(true, "Invalid image path.");
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
-      .catch(err => console.log(err));
+      .catch(err => {console.log(err); this.displayAlert(true, "Image recognition failed.Check image path.");});
   }
 
   onRouteChange = (route) => {
