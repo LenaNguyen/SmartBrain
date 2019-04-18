@@ -39,10 +39,13 @@ onSubmitRegister = () => {
             this.props.loadUser(user);
             this.props.onRouteChange('home');
         }else{
-            alert('Invalid request');
+            this.props.displayAlert(true, "Error registering.")
         }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        this.props.displayAlert(true, "Error registering.");
+    });
 }
     render() {
         return (
