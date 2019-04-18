@@ -14,23 +14,23 @@
     0% {opacity: 0;}
     100% {opacity: 1;}
  }
-
- @-webkit-keyframes fadeOut {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
- }
- 
- @keyframes fadeOut {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
- }
  
  .fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
+    opacity: 1;
+    transition: all 250ms linear;
  }
 
  .fadeOut{
-     -webkit-animation-name: fadeOut;
-     animation-name: fadeOut;
+    opacity: 0;
+    transition: all 250ms linear;
+      
+ }
+
+ @media screen and (min-width: 850px){
+    .fixedElement{
+        position: fixed;
+        top: 0;
+        margin: auto;
+        width: 100%;
+    }
  }

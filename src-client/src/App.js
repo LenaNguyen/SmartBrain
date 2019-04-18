@@ -32,7 +32,8 @@ const initialState = {
   boxes: [],
   route: 'signin',
   isSignedIn: false,
-  signInFailed: false,
+  errorExists: false,
+  errorMessage: "",
   user: {
     id: '',
     name: '',
@@ -79,8 +80,9 @@ class App extends Component {
     this.setState({boxes: boxes});
   }
 
-  displayAlert = (state) => {
-    this.setState({signInFailed: state});
+  displayAlert = (state, errorMessage) => {
+    this.setState({errorExists: state});
+    this.setState({errorMessage: errorMessage})
   }
 
   onInputChange = (event) => {
@@ -127,14 +129,14 @@ class App extends Component {
   }
   
   render() {
-    const {isSignedIn, imageUrl} = this.state;
+    const {isSignedIn, imageUrl, errorExists, errorMessage} = this.state;
     return (
       <div className="App">
-      {this.state.signInFailed === true ? 
-        <Alert displayAlert={this.displayAlert}/> : null
-      }
         <Particles className='particles' params={ParticlesOptions} />
+        <div className="flex-wrap">
         <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
+        <Alert displayAlert={this.displayAlert} errorExists={errorExists} errorMessage={errorMessage}/>
+        </div>
         {this.state.route === 'home'
           ? <div>
           <Logo />

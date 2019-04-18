@@ -30,17 +30,17 @@ class SignIn extends React.Component {
         })
         .then(response => response.json())
         .then(user => {
-            if(user.id){
+            if(user.id){                
+                this.props.displayAlert(false, "");
                 this.props.loadUser(user);
-                this.props.displayAlert(false);
                 this.props.onRouteChange('home');
             }
             else{
-                this.props.displayAlert(true);
+                this.props.displayAlert(true, "Error signing in.");
             }
         })
         .catch(err => {
-            this.props.displayAlert(true);
+            this.props.displayAlert(true, "Error signing in.");
         });
     }
     render() {

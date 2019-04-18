@@ -1,23 +1,43 @@
 import React, {Component} from 'react';
 import './Alert.css';
-
-const verticalAlign = {
-    top: "40%"
-}
+import close from "./close.png";
 
 class Alert extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
+        this.state = {
+            classes: "mw5 h3 relative top-0 center bg-silver hw3 bg-silver white shadow-2 animate br1 animate",
+        }
     }
-    componentDidMount() {
-        setTimeout(() => this.props.displayAlert(false), 4000);
+
+    setClasses = () => {
+        let allClasses =  this.state.classes;
+        if(this.props.isSignedIn){
+            allClasses += " o-0"
+        } else { 
+            allClasses += this.props.errorExists ? " fadeIn" : " fadeOut";
+        }
+        if(this.props.errorExists){
+            setTimeout(() => this.props.displayAlert(false, ""), 3000);
+        }
+        return allClasses;
+    }
+
+    setCursor = () => {
+        let allClasses = "absolute tl";
+        if(this.props.errorExists) 
+            allClasses += " pointer";
+        return allClasses;
     }
 
     render() {
         return (
-            <div className="">
-                <div className="animate fadeIn mw5 h3 relative top-0 center bg-silver hw3 bg-silver white shadow-2">
-                    <div className="white absolute" style={verticalAlign}>can you see me</div>
+            <div className="fixedElement">
+                <div className={this.setClasses()}>
+                    <div className="white absolute tl" style={{top:"40%", cursor:"default"}}>{this.props.errorMessage}</div>
+                    <img src={close} alt="close alert" className={this.setCursor()} 
+                    style={{top:"0", right:"2px", width:"15px", height:"15px"}}
+                    onClick={() => this.props.displayAlert(false)}/>
                 </div>
             </div>
         )
