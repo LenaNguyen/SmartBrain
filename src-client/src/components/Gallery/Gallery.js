@@ -21,7 +21,7 @@ class Gallery extends React.Component {
     const { images } = this.state;
 
     return (
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {images.map((image, index) => (
           <img
             src={image.location}

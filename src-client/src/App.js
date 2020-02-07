@@ -94,7 +94,7 @@ class App extends Component {
 
   onSubmitImage = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch(Settings.baseUrl + "imageUrl", {
+    fetch(Settings.baseUrl + "image/facialRecognition", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -104,16 +104,20 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response.status.description === "Ok") {
-          fetch(Settings.baseUrl + "image", {
-            method: "put",
+          fetch(Settings.baseUrl + `profile/${this.state.user.id}`, {
+            method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              id: this.state.user.id
+              incrementEntries: true
             })
           })
             .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
+            .then(updatedUser => {
+              this.setState(
+                Object.assign(this.state.user, {
+                  entries: updatedUser[0].entries
+                })
+              );
             })
             .catch(err => {
               console.log(err);

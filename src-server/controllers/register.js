@@ -1,8 +1,21 @@
-const handleRegister = (db, bcrypt) => (req, res) => {
+const handleRegister = (db, bcrypt, Joi) => (req, res) => {
+  const schema = Joi.object().keys({
+    name: Joi.string()
+      .max(255)
+      .required(),
+    email: Joi.string()
+      .email()
+      .required(),
+    password: Joi.string()
+      .min(5)
+      .required()
+  });
+
+  const validation = Joi.validate(req.body, schema);
+  if (validation.error) return res.status(400).json("invalid fields");
+
   const { email, name, password } = req.body;
-  if (!email || !name || !password) {
-    return res.status(400).json("missing fields");
-  }
+
   const hash = bcrypt.hashSync(password);
 
   db.transaction(trx => {

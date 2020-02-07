@@ -1,6 +1,16 @@
-const handleSignIn = (db, bcrypt) => (req, res) => {
+const handleSignIn = (db, bcrypt, Joi) => (req, res) => {
+  const schema = Joi.object().keys({
+    email: Joi.string()
+      .email()
+      .required(),
+    password: Joi.string()
+      .min(5)
+      .required()
+  });
+
   const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json("missing fields");
+  const validation = Joi.validate(req.body, schema);
+  if (validation.error) return res.status(400).json("invalid fields");
 
   db.select("email", "hash")
     .from("login")
